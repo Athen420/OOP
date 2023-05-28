@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${workspaceRoot}/out",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${workspaceRoot}/out/install/${presetName}"
+            }
+        },
+        {
+            "name": "benchmark-base",
+            "hidden": true,
+            "cacheVariables": { "VCPKG_BUILD_BENCHMARKING": "On" }
+        },
+        {
+            "name": "debug",
+            "displayName": "Debug",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+        },
+        {
+            "name": "debug-benchmarks",
+            "displayName": "Debug + Benchmarks",
+            "inherits": [ "debug", "benchmark-base"]
+        },
+        {
+            "name": "release-benchmarks",
+            "displayName": "Release + Benchmarks",
+            "inherits": [ "release", "benchmark-base" ]
+        }
+    ]
+}
