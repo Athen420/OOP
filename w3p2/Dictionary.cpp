@@ -1,21 +1,19 @@
 #include "Dictionary.h"
 
 namespace sdds {
+	// Implement the member functions here
 
-Dictionary::Dictionary(const std::string& term, const std::string& definition)
-    : m_term(term), m_definition(definition) {}
+	Dictionary::Dictionary() {}
 
-bool Dictionary::operator==(const Dictionary& other) const {
-  return m_term == other.m_term;
+	Dictionary::Dictionary(const std::string& word, const std::string& def)
+		: m_word(word), m_def(def) {}
+
+	const std::string& Dictionary::getTerm() const {
+		return m_word;
+	}
+
+	const std::string& Dictionary::getDefinition() const {
+		return m_def;
+	}
 }
 
-bool Dictionary::operator!=(const Dictionary& other) const {
-  return m_term != other.m_term;
-}
-
-std::ostream& operator<<(std::ostream& os, const Dictionary& dictionary) {
-  os << dictionary.m_term << ": " << dictionary.m_definition;
-  return os;
-}
-
-}  // namespace sdds
