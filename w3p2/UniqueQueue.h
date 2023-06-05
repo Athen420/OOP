@@ -1,3 +1,6 @@
+#ifndef SDDS_UNIQUEQUEUE_H
+#define SDDS_UNIQUEQUEUE_H
+
 #include <iostream>
 #include <cmath>
 
@@ -32,3 +35,5 @@ namespace sdds {
         }
     };
 }
+
+#endif
