@@ -2,14 +2,14 @@
 
 namespace sdds {
     const std::string& Dictionary::getTerm() const {
-        return m_word;
+        return m_term;
     }
 
     const std::string& Dictionary::getDefinition() const {
-        return m_def;
+        return m_definition;
     }
 
-    Dictionary::Dictionary(const std::string& word, const std::string& def)
-        : m_word(word), m_def(def) {
+    Dictionary::Dictionary(const std::string& term, const std::string& definition)
+        : m_term(term), m_definition(definition) {
     }
 }

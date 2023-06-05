@@ -5,15 +5,13 @@
 
 namespace sdds {
     class Dictionary {
-        std::string m_word;
-        std::string m_def;
+        std::string m_term{};
+        std::string m_definition{};
 
     public:
-        Dictionary();
-        Dictionary(const std::string& word, const std::string& def);
         const std::string& getTerm() const;
         const std::string& getDefinition() const;
+        Dictionary(const std::string& term = "", const std::string& definition = "");
     };
 }
-
 #endif // SDDS_DICTIONARY_H
