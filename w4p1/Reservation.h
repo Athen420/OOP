@@ -6,7 +6,7 @@
 
 namespace sdds {
     class Reservation {
-        char m_id[11];
+        char m_id[8];
         std::string m_name;
         std::string m_email;
         int m_partySize;
