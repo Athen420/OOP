@@ -1,14 +1,14 @@
 #ifndef SDDS_UNIQUEQUEUE_H
 #define SDDS_UNIQUEQUEUE_H
 
-#include <iostream>
 #include <cmath>
+#include "Queue.h"
 
 namespace sdds {
     template<typename T>
     class UniqueQueue : public Queue<T, 100> {
     public:
-        bool push(const T& item) {
+        bool push(const T& item) override {
             if (!contains(item)) {
                 return Queue<T, 100>::push(item);
             }

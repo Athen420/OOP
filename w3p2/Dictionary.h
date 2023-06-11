@@ -14,4 +14,5 @@ namespace sdds {
         Dictionary(const std::string& term = "", const std::string& definition = "");
     };
 }
-#endif // SDDS_DICTIONARY_H
+
+#endif
