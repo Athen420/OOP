@@ -1,2 +1,2 @@
-# OOP345
-Contains all my labs and assignments
+# OOP345 - Summer 2023
+Contains all my labs and milestones
