@@ -7,14 +7,14 @@
 //   and the content was created entirely by me.
 #ifndef SDDS_UTILITIES_H
 #define SDDS_UTILITIES_H
+
 #include <string>
-namespace sdds
-{
-    class Utilities
-    {
-    private:
+
+namespace sdds {
+    class Utilities {
         size_t m_widthField = 1;
         static char m_delimiter;
+
     public:
         void setFieldWidth(size_t newWidth);
         size_t getFieldWidth() const;
@@ -22,7 +22,7 @@ namespace sdds
         static void setDelimiter(char newDelimiter);
         static char getDelimiter();
     };
-    
 } // namespace sdds
 
 #endif
+

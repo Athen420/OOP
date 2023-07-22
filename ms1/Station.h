@@ -7,13 +7,12 @@
 //   and the content was created entirely by me.
 #ifndef SDDS_STATION_H
 #define SDDS_STATION_H
+
 #include <string>
 #include <iostream>
-namespace sdds
-{
-    class Station
-    {
-    private:
+
+namespace sdds {
+    class Station {
         int id = 0;
         std::string name;
         std::string desc;
@@ -21,6 +20,7 @@ namespace sdds
         unsigned int qty = 0;
         static size_t m_widthField;
         static int id_generator;
+
     public:
         Station(const std::string str);
         const std::string& getItemName() const;
@@ -29,7 +29,6 @@ namespace sdds
         void updateQuantity();
         void display(std::ostream& os, bool full) const;
     };
-    
-} // namespace sdds
+}  // namespace sdds
 
 #endif

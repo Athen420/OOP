@@ -7,10 +7,10 @@
 //   and the content was created entirely by me.
 #include "Utilities.h"
 
-namespace sdds
-{
+namespace sdds {
     char Utilities::m_delimiter;
-    void Utilities::setFieldWidth(size_t newWidth){
+
+    void Utilities::setFieldWidth(size_t newWidth) {
         m_widthField = newWidth;
     }
 
@@ -21,29 +21,34 @@ namespace sdds
     std::string Utilities::extractToken(const std::string& str, size_t& next_pos, bool& more) {
         if (str[next_pos] == m_delimiter) {
             more = false;
-            throw("Error: Delimeter at next_pos");
-            };
+            throw std::string("Error: Delimiter at next_pos");
+        }
 
         std::string returnVal;
 
-        //remove space from front (if any)
-        while (str[next_pos] == ' ') next_pos++;
+        // Remove leading spaces (if any)
+        while (str[next_pos] == ' ')
+            next_pos++;
 
-        //Read String (end result might contain spaces at back)
-        while (next_pos < str.length() && str[next_pos] != m_delimiter) returnVal += str[next_pos++];
+        // Read string (might contain trailing spaces)
+        while (next_pos < str.length() && str[next_pos] != m_delimiter)
+            returnVal += str[next_pos++];
 
-        //remove space from back (if any)
+        // Remove trailing spaces (if any)
         int itr = returnVal.length() - 1;
-        while (returnVal[itr] == ' '){
+        while (itr >= 0 && returnVal[itr] == ' ') {
             returnVal.erase(itr, 1);
             itr--;
         }
 
-        //check if there are more values
-        if (next_pos == str.length()) more = false;
-        else more = true;
+        // Check if there are more values
+        if (next_pos == str.length())
+            more = false;
+        else
+            more = true;
 
-        if (m_widthField < returnVal.length()) m_widthField = returnVal.length();
+        if (m_widthField < returnVal.length())
+            m_widthField = returnVal.length();
 
         next_pos++;
         return returnVal;
@@ -56,4 +61,5 @@ namespace sdds
     char Utilities::getDelimiter() {
         return m_delimiter;
     }
-} // namespace sdds
+}  // namespace sdds
+
