@@ -63,19 +63,15 @@ namespace w9 {
 
 	void SecureData::code(char key)
 	{
-		// Calculate the midpoint to divide the work for two threads
-    int midpoint = nbytes / 2;
+		thread t1(converter, text, key, nbytes, Cryptor());
+		thread t2(converter, text, key, nbytes, Cryptor());
 
-    // Create two threads, each processing its part of the data
-    std::thread thread1(converter, text, key, midpoint, Cryptor());
-    std::thread thread2(converter, text + midpoint, key, nbytes - midpoint, Cryptor());
-
-    // Wait for both threads to finish their work
-    thread1.join();
-    thread2.join();
-
-    encoded = !encoded;
+		encoded = !encoded;
+		
+		t1.join();
+		t2.join();
 	}
+
 
 	void SecureData::backup(const char* file) {
 		if (!text)
@@ -84,56 +80,47 @@ namespace w9 {
 			throw std::string("\n***Data is not encoded***\n");
 		else
 		{
-			// Open the binary file for writing
-            std::ofstream ofs(file, std::ios::binary);
-            if (!ofs)
-                throw std::string("\n***Failed to open binary file for writing***\n");
+			// TODO: open a binary file for writing
+			ofstream myfile;
+			myfile.open(file, ios::out | ios::binary);
+			
 
-            // Write data into the binary file and close the file
-            ofs.write(text, nbytes);
-
-            if (ofs.bad())
-                throw std::string("\n***Error occurred while writing to the binary file***\n");
-
-            ofs.close();
+			// TODO: write data into the binary file
+			//         and close the file
+			myfile.write(text, nbytes);
+			text[nbytes - 1] = '\0';
+			myfile.close();
+			delete[] text;
+			nbytes = 0;
+			encoded = false;
 		}
 	}
 
 	void SecureData::restore(const char* file, char key) {
-		// Open the binary file for reading
-        std::ifstream ifs(file, std::ios::binary);
-        if (!ifs)
-            throw std::string("\n***Failed to open binary file for reading***\n");
+        // TODO: open binary file for reading
+		if (nbytes != 0) {
+			delete[] text; nbytes = 0;
+		}
+		ifstream myfile(file, ios::in | ios::binary | ios::ate );
 
-        // Determine the number of bytes to be read
-        ifs.seekg(0, std::ios::end);
-        int fileBytes = static_cast<int>(ifs.tellg());
-        ifs.seekg(0, std::ios::beg);
+		// TODO: - allocate memory here for the file content
+		
+		nbytes = (int)myfile.tellg() + 1;
+		text = new char[nbytes];
 
-        // Deallocate the existing data and allocate memory for the restored data
-        delete[] text;
-        text = new char[fileBytes];
+		// TODO: - read the content of the binary file
+		myfile.seekg(0, ios::beg);
+		myfile.read(text, nbytes);
 
-        // Read the content of the binary file
-        ifs.read(text, fileBytes);
+        *ofs << "\n" << nbytes << " bytes copied from binary file "
+            << file << " into memory.\n";
 
-        if (ifs.bad())
-            throw std::string("\n***Error occurred while reading from the binary file***\n");
+        encoded = true;
 
-        // Update the nbytes and encode the data using the key
-        nbytes = fileBytes;
+        // decode using key
         code(key);
 
-
-		*ofs << "\n" << nbytes << " bytes copied from binary file "
-			<< file << " into memory.\n";
-
-		encoded = true;
-
-		// decode using key
-		code(key);
-
-		*ofs << "Data decrypted in memory\n\n";
+        *ofs << "Data decrypted in memory\n\n";
 	}
 
 	std::ostream& operator<<(std::ostream& os, const SecureData& sd) {
