@@ -1,0 +1,7 @@
+In this workshop, I worked on managing a collection of crimes using the STL Algorithm category. I utilized various STL functions, including std::ifstream to read data from a file, std::accumulate to calculate sums, std::for_each with lambdas for custom operations, and std::sort for sorting crime data.
+
+Choosing STL algorithms over manual loops has several advantages. STL algorithms offer a standardized, readable syntax, making the code more maintainable. They are also highly optimized, providing better performance compared to implementing functions from scratch. Additionally, using well-known algorithms promotes code reusability and consistency within the standard library.
+
+One potential issue arose when the sorting function received a field name as a parameter, risking errors if the client provided an invalid or misspelled field name. To address this, I would redesign the function to accept an enum or custom data type representing valid field names. This approach restricts client inputs to predefined options, ensuring the compiler catches any invalid inputs during compilation, preventing runtime errors and enhancing code safety.
+
+In conclusion, completing this workshop enhanced my understanding of STL algorithms and their benefits, while also reinforcing the importance of design choices for error prevention and code robustness.
