@@ -26,3 +26,4 @@ namespace sdds {
 		}
 	};
 }
+#endif

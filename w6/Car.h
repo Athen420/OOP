@@ -19,3 +19,4 @@ namespace sdds {
 		void display(std::ostream& out) const;
 ;	};
 }
+#endif

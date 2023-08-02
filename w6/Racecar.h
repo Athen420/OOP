@@ -14,3 +14,4 @@ namespace sdds {
 		bool booster() const;
 	};
 }
+#endif
